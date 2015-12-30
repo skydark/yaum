@@ -72,6 +72,11 @@ public class EventHandlerWrapper {
         public void handle(EventWrapper.MyCheckSpawnEvent event);
     }
 
+    @ZenClass("mod.yaum.IEventHandler.IDisableSpawn")
+    public interface IDisableSpawnEventHandler {
+        public boolean handle(EventWrapper.MyCheckSpawnEvent event);
+    }
+
     @ZenClass("mod.yaum.IEventHandler.IItemPickup")
     public interface IItemPickupEventHandler {
         public void handle(EventWrapper.MyItemPickupEvent event);

@@ -10,6 +10,7 @@ import minetweaker.util.IEventHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.stats.Achievement;
+import stanhebben.zenscript.annotations.Optional;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
@@ -82,6 +83,32 @@ public class MTEvents {
                         handler.handle(event);
                     } catch (Throwable e) {
                         MineTweakerAPI.logError("Exception during handling event", e);
+                    }
+                }
+            }
+        });
+    }
+
+    @ZenMethod
+    public static void disableSpawn(final String name, final int dim, @Optional final EventHandlerWrapper.IDisableSpawnEventHandler handler) {
+        EventManager.getInstance().checkSpawn.on(new IEventHandler<EventWrapper.MyCheckSpawnEvent>() {
+            @Override
+            public void handle(EventWrapper.MyCheckSpawnEvent event) {
+                if (MTHelper.matchEntity(name, event.getEntityLiving()) &&
+                        (dim == 65536 || dim == MTHelper.getDimensionId(event.getWorld())) &&
+                        event.isResult("Default")) {
+                    boolean check = false;
+                    if (handler == null) {
+                        check = true;
+                    } else {
+                        try {
+                            check = handler.handle(event);
+                        } catch (Throwable e) {
+                            MineTweakerAPI.logError("Exception during handling event", e);
+                        }
+                    }
+                    if (check) {
+                        event.deny();
                     }
                 }
             }
