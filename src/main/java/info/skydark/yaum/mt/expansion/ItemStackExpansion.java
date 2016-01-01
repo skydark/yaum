@@ -2,6 +2,7 @@ package info.skydark.yaum.mt.expansion;
 
 import info.skydark.yaum.mt.MTHelper;
 import info.skydark.yaum.util.NBTHelper;
+import minetweaker.MineTweakerAPI;
 import minetweaker.api.data.IData;
 import minetweaker.api.item.IItemStack;
 import net.minecraft.item.ItemStack;
@@ -23,5 +24,12 @@ public class ItemStackExpansion {
     public static boolean setTagByPath(IItemStack stack, String path, IData data) {
         ItemStack _stack = MTHelper.getItemStack(stack);
         return _stack != null && NBTHelper.setTagByPath(_stack, path, MTHelper.getNBT(data));
+    }
+
+    @ZenMethod
+    public static void setHarvestLevel(IItemStack stack, String toolClass, int value) {
+        ItemStack _stack = MTHelper.getItemStack(stack);
+        if (_stack == null) return;
+        MineTweakerAPI.apply(new SetHarvestLevelAction(_stack, toolClass, value));
     }
 }
