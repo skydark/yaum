@@ -81,4 +81,9 @@ public class EventHandlerWrapper {
     public interface IItemPickupEventHandler {
         public void handle(EventWrapper.MyItemPickupEvent event);
     }
+
+    @ZenClass("mod.yaum.IEventHandler.IItemCrafted")
+    public interface IItemCraftedEventHandler {
+        public void handle(EventWrapper.MyItemCraftedEvent event);
+    }
 }

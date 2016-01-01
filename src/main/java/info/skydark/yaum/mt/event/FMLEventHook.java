@@ -23,4 +23,9 @@ public class FMLEventHook {
     public void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent ev) {
         EventManager.getInstance().playerRespawn.publish(MTHelper.getIPlayer(ev.player));
     }
+
+    @SubscribeEvent
+    public void onItemCrafted(PlayerEvent.ItemCraftedEvent ev) {
+        EventManager.getInstance().itemCrafted.publish(new EventWrapper.MyItemCraftedEvent(ev));
+    }
 }

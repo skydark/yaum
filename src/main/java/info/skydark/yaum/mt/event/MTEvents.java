@@ -90,6 +90,23 @@ public class MTEvents {
     }
 
     @ZenMethod
+    public static void onItemCrafted(final IIngredient ingredient, final EventHandlerWrapper.IItemCraftedEventHandler handler) {
+        if (ingredient == null) return;
+        EventManager.getInstance().itemCrafted.on(new IEventHandler<EventWrapper.MyItemCraftedEvent>() {
+            @Override
+            public void handle(EventWrapper.MyItemCraftedEvent event) {
+                if (ingredient.matches(event.getItem())) {
+                    try {
+                        handler.handle(event);
+                    } catch (Throwable e) {
+                        MineTweakerAPI.logError("Exception during handling event", e);
+                    }
+                }
+            }
+        });
+    }
+
+    @ZenMethod
     public static void disableSpawn(final String name, final int dim, @Optional final EventHandlerWrapper.IDisableSpawnEventHandler handler) {
         EventManager.getInstance().checkSpawn.on(new IEventHandler<EventWrapper.MyCheckSpawnEvent>() {
             @Override

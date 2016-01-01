@@ -1,6 +1,7 @@
 package info.skydark.yaum.mt.event;
 
 import cpw.mods.fml.common.eventhandler.Event;
+import cpw.mods.fml.common.gameevent.*;
 import info.skydark.yaum.mt.MTHelper;
 import info.skydark.yaum.mt.expansion.EntityExpansion;
 import info.skydark.yaum.mt.type.IEntityLivingBase;
@@ -23,6 +24,7 @@ import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.*;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenGetter;
@@ -478,6 +480,28 @@ public class EventWrapper {
             if (itemStack != null) {
                 item.setEntityItemStack(itemStack);
             }
+        }
+    }
+
+    @ZenClass("mod.yaum.event.ItemCraftedEvent")
+    public static class MyItemCraftedEvent {
+        private final EntityPlayer player;
+        private final ItemStack itemStack;
+
+        public MyItemCraftedEvent(cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent ev) {
+            player = ev.player;
+            itemStack = ev.crafting;
+            // ev.craftMatrix
+        }
+
+        @ZenGetter("player")
+        public IPlayerPlus getPlayer() {
+            return MTHelper.getIPlayer(player);
+        }
+
+        @ZenGetter("item")
+        public IItemStack getItem() {
+            return MTHelper.getIItemStack(itemStack);
         }
     }
 

@@ -23,6 +23,7 @@ public class EventManager {
     public final EventModule<EventWrapper.MyEnderTeleportEvent> enderTeleport;
     public final EventModule<EventWrapper.MyCheckSpawnEvent> checkSpawn;
     public final EventModule<EventWrapper.MyItemPickupEvent> itemPickup;
+    public final EventModule<EventWrapper.MyItemCraftedEvent> itemCrafted;
     public final EventModule<EventWrapper.MyAchievementEvent> achievement;
     public final EventModule<IPlayerPlus> playerLogin;
     public final EventModule<IPlayerPlus> playerRespawn;
@@ -40,6 +41,7 @@ public class EventManager {
         enderTeleport = new EventModule<EventWrapper.MyEnderTeleportEvent>();
         checkSpawn = new EventModule<EventWrapper.MyCheckSpawnEvent>();
         itemPickup = new EventModule<EventWrapper.MyItemPickupEvent>();
+        itemCrafted = new EventModule<EventWrapper.MyItemCraftedEvent>();
         achievement = new EventModule<EventWrapper.MyAchievementEvent>();
         playerLogin = new EventModule<IPlayerPlus>();
         playerRespawn = new EventModule<IPlayerPlus>();
@@ -54,6 +56,7 @@ public class EventManager {
         eventModules.add(enderTeleport);
         eventModules.add(checkSpawn);
         eventModules.add(itemPickup);
+        eventModules.add(itemCrafted);
         eventModules.add(playerLogin);
         eventModules.add(playerRespawn);
         eventModules.add(achievement);
