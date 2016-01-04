@@ -9,6 +9,8 @@ import info.skydark.yaum.mt.var.IVarSet;
 import minetweaker.MineTweakerAPI;
 import minetweaker.MineTweakerImplementationAPI;
 import minetweaker.util.IEventHandler;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
 import stanhebben.zenscript.annotations.ZenClass;
 
@@ -63,5 +65,10 @@ public class MineTweakerIntegration {
                 }
             }
         }
+    }
+
+    public static void invokeMTHook(String name, EntityPlayer player, NBTTagCompound nbtTagCompound) {
+        MyHookEvent event = (new MyHookEvent()).setName(name).setPlayer(player).setData(nbtTagCompound);
+        MTEvents.invokeHook(event);
     }
 }

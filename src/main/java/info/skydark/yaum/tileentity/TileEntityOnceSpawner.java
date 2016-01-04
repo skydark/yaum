@@ -1,7 +1,8 @@
 package info.skydark.yaum.tileentity;
 
 import cpw.mods.fml.common.FMLLog;
-import info.skydark.yaum.mt.util.OpCommandSender;
+import info.skydark.yaum.Yaum;
+import info.skydark.yaum.mt.MineTweakerIntegration;
 import info.skydark.yaum.util.CommandHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -69,6 +70,14 @@ public class TileEntityOnceSpawner extends TileEntity {
         try {
             if (action.startsWith("@")) {
                 CommandHelper.executeCommandAsOp(player, action.substring(1));
+            } else if (action.startsWith("!")) {
+                if (Yaum.mtIntegration) {
+                    NBTTagCompound nbtTagCompound = new NBTTagCompound();
+                    writeToNBT(nbtTagCompound);
+                    MineTweakerIntegration.invokeMTHook(action.substring(1), player, nbtTagCompound);
+                } else {
+                    return false;
+                }
             } else {
                 CommandHelper.executeCommandAsOp(worldObj, xCoord, yCoord, zCoord, "", action);
             }
