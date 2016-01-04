@@ -60,6 +60,26 @@ public class EventWrapper {
         public boolean isCanceled() {
             return canceled;
         }
+
+        @ZenMethod
+        public void allow() {
+            event.setResult(Event.Result.ALLOW);
+        }
+
+        @ZenMethod
+        public void deny() {
+            event.setResult(Event.Result.DENY);
+        }
+
+        @ZenMethod
+        public void setDefault() {
+            event.setResult(Event.Result.DEFAULT);
+        }
+
+        @ZenMethod
+        public boolean isResult(String result) {
+            return event.getResult().name().equalsIgnoreCase(result);
+        }
     }
 
     @ZenClass("mod.yaum.event.EntityEvent")
@@ -540,26 +560,6 @@ public class EventWrapper {
         @ZenGetter("world")
         public IDimension getWorld() {
             return MTHelper.getIDimension(world);
-        }
-
-        @ZenMethod
-        public void allow() {
-            event.setResult(Event.Result.ALLOW);
-        }
-
-        @ZenMethod
-        public void deny() {
-            event.setResult(Event.Result.DENY);
-        }
-
-        @ZenMethod
-        public void setDefault() {
-            event.setResult(Event.Result.DEFAULT);
-        }
-
-        @ZenMethod
-        public boolean isResult(String result) {
-            return event.getResult().name().equalsIgnoreCase(result);
         }
 
         @ZenMethod
