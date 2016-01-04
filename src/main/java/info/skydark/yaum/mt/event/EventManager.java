@@ -12,6 +12,7 @@ public class EventManager {
     private static EventManager instance = new EventManager();
     private List<EventModule> eventModules;
 
+    public final EventModule<MyHookEvent> yaumHook;
     public final EventModule<EventWrapper.MyPlayerInteractEvent> playerInteract;
     public final EventModule<EventWrapper.MyPlayerInteractEntityEvent> playerInteractEntity;
     public final EventModule<EventWrapper.MyPlayerAttackEntityEvent> playerAttackEntity;
@@ -30,6 +31,7 @@ public class EventManager {
 
     private EventManager(){
         eventModules = new ArrayList<EventModule>();
+        yaumHook = new EventModule<MyHookEvent>();
         playerInteract = new EventModule<EventWrapper.MyPlayerInteractEvent>();
         playerInteractEntity = new EventModule<EventWrapper.MyPlayerInteractEntityEvent>();
         playerAttackEntity = new EventModule<EventWrapper.MyPlayerAttackEntityEvent>();
@@ -45,6 +47,7 @@ public class EventManager {
         achievement = new EventModule<EventWrapper.MyAchievementEvent>();
         playerLogin = new EventModule<IPlayerPlus>();
         playerRespawn = new EventModule<IPlayerPlus>();
+        eventModules.add(yaumHook);
         eventModules.add(playerInteract);
         eventModules.add(playerInteractEntity);
         eventModules.add(playerAttackEntity);

@@ -86,4 +86,9 @@ public class EventHandlerWrapper {
     public interface IItemCraftedEventHandler {
         public void handle(EventWrapper.MyItemCraftedEvent event);
     }
+
+    @ZenClass("mod.yaum.IEventHandler.IYaumHook")
+    public interface IYaumHookHandler {
+        public void handle(MyHookEvent event);
+    }
 }

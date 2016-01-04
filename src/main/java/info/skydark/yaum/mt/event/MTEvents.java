@@ -20,6 +20,28 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ZenClass("mod.yaum.Events")
 public class MTEvents {
     @ZenMethod
+    public static void registerHook(final String id, final EventHandlerWrapper.IYaumHookHandler handler) {
+        if (id == null || handler == null) return;
+        EventManager.getInstance().yaumHook.on(new IEventHandler<MyHookEvent>() {
+            @Override
+            public void handle(MyHookEvent event) {
+                if (id.equals("*") || id.equals(event.getName())) {
+                    try {
+                        handler.handle(event);
+                    } catch (Throwable e) {
+                        MineTweakerAPI.logError("Exception during handling event", e);
+                    }
+                }
+            }
+        });
+    }
+
+    @ZenMethod
+    public static void invokeHook(MyHookEvent event) {
+        EventManager.getInstance().yaumHook.publish(event);
+    }
+
+    @ZenMethod
     public static void onAchievement(String id, final EventHandlerWrapper.IAchievementPlayerHandler handler) {
         if (id == null || handler == null) return;
         final String _id = "achievement." + id;

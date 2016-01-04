@@ -39,6 +39,7 @@ public class MineTweakerIntegration {
         MineTweakerAPI.registerClass(DimensionExpansion.class);
         MineTweakerAPI.registerClass(ItemStackExpansion.class);
 
+        MineTweakerAPI.registerClass(MyHookEvent.class);
         registerSubclasses(EventWrapper.class);
         registerSubclasses(EventHandlerWrapper.class);
 
