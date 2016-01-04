@@ -276,6 +276,12 @@ public class EventWrapper {
         public boolean getUseItem() {
             return event.useItem != Event.Result.DENY;
         }
+        @Override
+        public void deny() {
+            event.useBlock = Event.Result.DENY;
+            event.useItem = Event.Result.DENY;
+            super.deny();
+        }
         public PlayerInteractEvent getInternal() {
             return event;
         }
