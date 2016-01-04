@@ -23,6 +23,8 @@ public class Yaum
     public static final String MODID = "${MOD_ID}";
     public static final String VERSION = "${MOD_VERSION}";
 
+    public static boolean mtIntegration = false;
+
     public static CreativeTabs yaumTab = new CreativeTabs("yaum") {
 
         @Override
@@ -36,9 +38,11 @@ public class Yaum
     public void preinit(FMLPreInitializationEvent event)
     {
         Config.init(event.getSuggestedConfigurationFile());
+        mtIntegration = Config.mtIntegration && Loader.isModLoaded("MineTweaker3");
+
         ModItems.init();
         ModBlocks.init();
-        if (Config.mtIntegration && Loader.isModLoaded("MineTweaker3")) {
+        if (mtIntegration) {
             MineTweakerIntegration.init();
         }
     }
