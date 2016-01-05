@@ -21,13 +21,11 @@ import minetweaker.mc1710.brackets.OreBracketHandler;
 import minetweaker.mc1710.world.MCDimension;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.*;
 import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityTameable;
@@ -171,6 +169,24 @@ public class MTHelper {
                         if (reversed != (entity instanceof IMob)) continue;
                     } else if (pattern2.equals("<boss>")) {
                         if (reversed != (entity instanceof IBossDisplayData)) continue;
+                    } else if (pattern2.equals("<undead>")) {
+                        if (reversed !=
+                                ((entity instanceof EntityLivingBase)
+                                        && ((EntityLivingBase) entity).getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)) {
+                            continue;
+                        }
+                    } else if (pattern2.equals("<arthropod>")) {
+                        if (reversed !=
+                                ((entity instanceof EntityLivingBase)
+                                        && ((EntityLivingBase) entity).getCreatureAttribute() == EnumCreatureAttribute.ARTHROPOD)) {
+                            continue;
+                        }
+                    } else if (pattern2.equals("<witherskeleton>")) {
+                        if (reversed !=
+                                ((entity instanceof EntitySkeleton)
+                                        && ((EntitySkeleton) entity).getSkeletonType() == 1)) {
+                            continue;
+                        }
                     } else {
                         MineTweakerAPI.logError("Unknown entity pattern:" + pattern);
                     }
