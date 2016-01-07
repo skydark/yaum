@@ -2,12 +2,18 @@ package info.skydark.yaum.mt.event;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 import info.skydark.yaum.mt.MTHelper;
 
 /**
  * Created by skydark on 15-11-15.
  */
 public class FMLEventHook {
+    @SubscribeEvent
+    public void onPlayerTick(TickEvent.PlayerTickEvent ev) {
+        EventManager.getInstance().playerTick.publish(new EventWrapper.MyPlayerTickEvent(ev));
+    }
+
     @SubscribeEvent
     public void onPlayerChangedDimension(PlayerEvent.PlayerChangedDimensionEvent ev) {
         EventManager.getInstance().playerChangedDimension.publish(

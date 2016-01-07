@@ -87,6 +87,11 @@ public class EventHandlerWrapper {
         public void handle(EventWrapper.MyItemCraftedEvent event);
     }
 
+    @ZenClass("mod.yaum.IEventHandler.IPlayerTick")
+    public interface IPlayerTickHandler {
+        public void handle(EventWrapper.MyPlayerTickEvent event);
+    }
+
     @ZenClass("mod.yaum.IEventHandler.IYaumHook")
     public interface IYaumHookHandler {
         public void handle(MyHookEvent event);

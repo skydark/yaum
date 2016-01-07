@@ -20,6 +20,27 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ZenClass("mod.yaum.Events")
 public class MTEvents {
     @ZenMethod
+    public static void onPlayerStartTicked(final int interval, final EventHandlerWrapper.IPlayerTickHandler handler) {
+        EventManager.getInstance().playerTick.on(new IEventHandler<EventWrapper.MyPlayerTickEvent>() {
+            private int tick = 0;
+
+            @Override
+            public void handle(EventWrapper.MyPlayerTickEvent event) {
+                if (!event.isStartPhase()) return;
+                tick++;
+                if (tick >= interval) {
+                    tick = 0;
+                    try {
+                        handler.handle(event);
+                    } catch (Throwable e) {
+                        MineTweakerAPI.logError("Exception during handling event", e);
+                    }
+                }
+            }
+        });
+    }
+
+    @ZenMethod
     public static void registerHook(final String id, final EventHandlerWrapper.IYaumHookHandler handler) {
         if (id == null || handler == null) return;
         EventManager.getInstance().yaumHook.on(new IEventHandler<MyHookEvent>() {

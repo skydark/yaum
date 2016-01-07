@@ -26,6 +26,7 @@ public class EventManager {
     public final EventModule<EventWrapper.MyItemPickupEvent> itemPickup;
     public final EventModule<EventWrapper.MyItemCraftedEvent> itemCrafted;
     public final EventModule<EventWrapper.MyAchievementEvent> achievement;
+    public final EventModule<EventWrapper.MyPlayerTickEvent> playerTick;
     public final EventModule<IPlayerPlus> playerLogin;
     public final EventModule<IPlayerPlus> playerRespawn;
 
@@ -45,6 +46,7 @@ public class EventManager {
         itemPickup = new EventModule<EventWrapper.MyItemPickupEvent>();
         itemCrafted = new EventModule<EventWrapper.MyItemCraftedEvent>();
         achievement = new EventModule<EventWrapper.MyAchievementEvent>();
+        playerTick = new EventModule<EventWrapper.MyPlayerTickEvent>();
         playerLogin = new EventModule<IPlayerPlus>();
         playerRespawn = new EventModule<IPlayerPlus>();
         eventModules.add(yaumHook);
@@ -60,6 +62,7 @@ public class EventManager {
         eventModules.add(checkSpawn);
         eventModules.add(itemPickup);
         eventModules.add(itemCrafted);
+        eventModules.add(playerTick);
         eventModules.add(playerLogin);
         eventModules.add(playerRespawn);
         eventModules.add(achievement);

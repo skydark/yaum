@@ -1,6 +1,8 @@
 package info.skydark.yaum.mt.event;
 
 import cpw.mods.fml.common.eventhandler.Event;
+import cpw.mods.fml.common.gameevent.TickEvent;
+import cpw.mods.fml.relauncher.Side;
 import info.skydark.yaum.mt.MTHelper;
 import info.skydark.yaum.mt.expansion.EntityExpansion;
 import info.skydark.yaum.mt.type.IEntityLivingBase;
@@ -504,6 +506,31 @@ public class EventWrapper {
             if (itemStack != null) {
                 item.setEntityItemStack(itemStack);
             }
+        }
+    }
+
+    @ZenClass("mod.yaum.event.PlayerTickEvent")
+    public static class MyPlayerTickEvent extends MyEvent {
+        private final TickEvent.PlayerTickEvent tickEvent;
+
+        public MyPlayerTickEvent(TickEvent.PlayerTickEvent ev) {
+            super(ev);
+            tickEvent = ev;
+        }
+
+        @ZenGetter
+        public boolean isServerSide() {
+            return tickEvent.side == Side.SERVER;
+        }
+
+        @ZenGetter
+        public boolean isStartPhase() {
+            return tickEvent.phase == TickEvent.Phase.START;
+        }
+
+        @ZenGetter("player")
+        public IPlayerPlus getPlayer() {
+            return MTHelper.getIPlayer(tickEvent.player);
         }
     }
 
