@@ -1,7 +1,6 @@
 package info.skydark.yaum.mt.event;
 
 import cpw.mods.fml.common.eventhandler.Event;
-import cpw.mods.fml.common.gameevent.*;
 import info.skydark.yaum.mt.MTHelper;
 import info.skydark.yaum.mt.expansion.EntityExpansion;
 import info.skydark.yaum.mt.type.IEntityLivingBase;
@@ -21,10 +20,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityEvent;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.*;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenGetter;
@@ -323,12 +320,13 @@ public class EventWrapper {
     }
 
     @ZenClass("mod.yaum.event.PlayerChangedDimensionEvent")
-    public static class MyPlayerChangedDimensionEvent {
+    public static class MyPlayerChangedDimensionEvent extends MyEvent {
         private final IPlayerPlus player;
         private final IDimension from;
         private final IDimension to;
 
         public MyPlayerChangedDimensionEvent(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent event) {
+            super(event);
             this.player = MTHelper.getIPlayer(event.player);
             this.from = MTHelper.getIDimension(event.fromDim);
             this.to = MTHelper.getIDimension(event.toDim);
@@ -510,11 +508,12 @@ public class EventWrapper {
     }
 
     @ZenClass("mod.yaum.event.ItemCraftedEvent")
-    public static class MyItemCraftedEvent {
+    public static class MyItemCraftedEvent extends MyEvent {
         private final EntityPlayer player;
         private final ItemStack itemStack;
 
         public MyItemCraftedEvent(cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent ev) {
+            super(ev);
             player = ev.player;
             itemStack = ev.crafting;
             // ev.craftMatrix
