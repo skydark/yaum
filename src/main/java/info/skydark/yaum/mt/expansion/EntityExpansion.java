@@ -53,6 +53,12 @@ public class EntityExpansion {
     }
 
     @ZenMethod
+    public static void setFire(IEntity iEntity, int time) {
+        Entity entity = MTHelper.getEntity(iEntity);
+        if (entity != null) entity.setFire(time);
+    }
+
+    @ZenMethod
     public static IEntityLivingBase asLivingBase(IEntity iEntity) {
         Entity entity = MTHelper.getEntity(iEntity);
         return entity instanceof EntityLivingBase ? MTHelper.getIEntityLivingBase((EntityLivingBase) entity) : null;
