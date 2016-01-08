@@ -70,6 +70,11 @@ public class MCPlayerPlus extends MCPlayer implements IPlayerPlus {
     }
 
     @Override
+    public void addPotionEffect(String name, int duration, int amplifier, boolean isAmbient) {
+        MTHelper.getIEntityLivingBase(entityPlayer).addPotionEffect(name, duration, amplifier, isAmbient);
+    }
+
+    @Override
     public int nextInt(int n) {
         return MTHelper.getIEntityLivingBase(entityPlayer).nextInt(n);
     }

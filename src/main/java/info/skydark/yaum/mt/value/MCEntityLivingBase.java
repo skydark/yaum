@@ -2,11 +2,14 @@ package info.skydark.yaum.mt.value;
 
 import info.skydark.yaum.mt.MTHelper;
 import info.skydark.yaum.mt.type.IEntityLivingBase;
+import info.skydark.yaum.util.PotionHelper;
 import minetweaker.api.entity.IEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import stanhebben.zenscript.annotations.Optional;
 import stanhebben.zenscript.annotations.ZenMethod;
 
@@ -77,6 +80,16 @@ public class MCEntityLivingBase extends MCEntity implements IEntityLivingBase {
                 if (entityLivingBase instanceof EntityCreature) {
                     ((EntityCreature) entityLivingBase).setTarget(entity);
                 }
+            }
+        }
+    }
+
+    @Override
+    public void addPotionEffect(String name, int duration, int amplifier, boolean isAmbient) {
+        if (entityLivingBase != null) {
+            Potion potion = PotionHelper.getPotionByName(name);
+            if (potion != null) {
+                entityLivingBase.addPotionEffect(new PotionEffect(potion.getId(), duration * 20, amplifier, isAmbient));
             }
         }
     }

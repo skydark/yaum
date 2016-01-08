@@ -36,6 +36,9 @@ public interface IEntityLivingBase extends IEntity {
     public void setTarget(IEntityLivingBase entity);
 
     @ZenMethod
+    public void addPotionEffect(String name, int duration, int amplifier, @Optional boolean isAmbient);
+
+    @ZenMethod
     public int nextInt(@Optional int n);
 
     @ZenMethod
