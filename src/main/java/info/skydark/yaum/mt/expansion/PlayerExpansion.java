@@ -319,4 +319,24 @@ public class PlayerExpansion {
         }
         return false;
     }
+
+    @ZenMethod
+    public static boolean hasArmor(IPlayer iPlayer, IIngredient ingredient, @Optional int pos) {
+        EntityPlayer player = MTHelper.getPlayer(iPlayer);
+        if (player == null) return false;
+        ItemStack[] inventory = player.inventory.armorInventory;
+        if (pos == 0) {
+            for (int i = 0; i < inventory.length; i++) {
+                ItemStack stack = inventory[i];
+                if (MTHelper.matchItemStack(ingredient, stack)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        pos--;
+        if (pos < 0 || pos >= inventory.length) return false;
+        ItemStack stack = inventory[pos];
+        return MTHelper.matchItemStack(ingredient, stack);
+    }
 }
