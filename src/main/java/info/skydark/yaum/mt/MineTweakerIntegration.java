@@ -6,6 +6,7 @@ import info.skydark.yaum.mt.event.*;
 import info.skydark.yaum.mt.expansion.*;
 import info.skydark.yaum.mt.type.*;
 import info.skydark.yaum.mt.var.IVarSet;
+import info.skydark.yaum.mt.var.VarHandler;
 import minetweaker.MineTweakerAPI;
 import minetweaker.MineTweakerImplementationAPI;
 import minetweaker.util.IEventHandler;
@@ -48,6 +49,7 @@ public class MineTweakerIntegration {
         MineTweakerAPI.registerClass(MTEvents.class);
 
         MinecraftForge.EVENT_BUS.register(new ForgeEventHook());
+        MinecraftForge.EVENT_BUS.register(new VarHandler());
         FMLCommonHandler.instance().bus().register(new FMLEventHook());
         MineTweakerImplementationAPI.onReloadEvent(new IEventHandler<MineTweakerImplementationAPI.ReloadEvent>() {
             @Override

@@ -5,6 +5,7 @@ import info.skydark.yaum.mt.MTHelper;
 import info.skydark.yaum.mt.type.IEntityLivingBase;
 import info.skydark.yaum.mt.type.IPlayerPlus;
 import info.skydark.yaum.mt.var.IVarSet;
+import info.skydark.yaum.mt.var.VarProperties;
 import info.skydark.yaum.mt.var.WorldVarSavedData;
 import minetweaker.api.entity.IEntity;
 import minetweaker.api.item.IIngredient;
@@ -67,6 +68,12 @@ public class PlayerExpansion {
     public static void sendChatLocal(IPlayer iPlayer, String message, @Optional boolean clientSide) {
         if (clientSide != isRemote(iPlayer)) return;
         iPlayer.sendChat(StatCollector.translateToLocal(message));
+    }
+
+    @ZenGetter("flag")
+    public static IVarSet getFlag(IPlayer iPlayer) {
+        EntityPlayer player = MTHelper.getPlayer(iPlayer);
+        return player == null? null : VarProperties.getVarProperties(player);
     }
 
     @ZenGetter("varWorld")
