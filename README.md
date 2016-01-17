@@ -1,7 +1,7 @@
 Yet Another Useless Mod
 ===========
 
-Nope, it is not a minetweaker addons, and is not working with Minetweaker 3.0.10B.
+Nope, it is not a minetweaker addons, and is only working with Minetweaker3's latest git version.
 
 Still W.I.P.
 
