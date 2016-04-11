@@ -23,6 +23,7 @@ public class ToolTipHandler {
         List<String> tooltips = event.toolTip;
         for (int i = 0; i < event.toolTip.size(); i++) {
             String tooltip = tooltips.get(i);
+            if (tooltip == null) continue;
             Matcher m = regexp.matcher(tooltip);
             while (m.find()) {
                 String translated = StatCollector.translateToLocal(m.group(1));
