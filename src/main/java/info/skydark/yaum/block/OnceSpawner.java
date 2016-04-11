@@ -24,7 +24,7 @@ public class OnceSpawner extends BlockContainer {
     public OnceSpawner() {
         super(Material.rock);
         setBlockName(Yaum.MODID + ":" + name);
-        GameRegistry.registerBlock(this, Yaum.MODID + ":" + this.name);
+        GameRegistry.registerBlock(this, this.name);
         setCreativeTab(Yaum.yaumTab);
     }
 
